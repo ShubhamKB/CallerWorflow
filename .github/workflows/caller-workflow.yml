@@ -1,0 +1,14 @@
+name: Caller Workflow
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  workflow-1:
+    uses: ShubhamKB/ReusableWorkflow/.github/workflows/common-workflow.yml@main
+    with:
+       region: us-east1
+       gar_location: us-east1-docker.pkg.dev/proud-outpost-396306/repo1
+    secrets:
+       gcp_sa_key: ${{ secrets.GCP_SA_KEY }}
