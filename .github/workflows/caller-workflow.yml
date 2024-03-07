@@ -6,9 +6,16 @@ on:
 
 jobs:
   workflow-1:
+    strategy:
+      matrix:
+        include:
+          - region: us-east1
+            gar_location: us-east1-docker.pkg.dev/proud-outpost-396306/repo1
+          - region: europe-west1
+            gar_location: europe-west1-docker.pkg.dev/proud-outpost-396306/repo2
     uses: ShubhamKB/ReusableWorkflow/.github/workflows/common-workflow.yml@main
     with:
-       region: us-east1
-       gar_location: us-east1-docker.pkg.dev/proud-outpost-396306/repo1
+       region: ${{ matrix.region }}
+       gar_location: ${{ matrix.gar_location }}
     secrets:
        gcp_sa_key: ${{ secrets.GCP_SA_KEY }}
